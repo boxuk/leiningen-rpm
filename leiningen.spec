@@ -11,7 +11,8 @@ AutoReqProv: no
 
 %define _gitrepository .
 %define _prefix /usr/share
-%define _lein_jar leiningen-%{_ver}-standalone.jar
+%define _lein_version 2.1.3
+%define _lein_jar leiningen-%{_lein_version}-standalone.jar
 
 %description
 Leiningen Build Tool (Box UK)
@@ -25,6 +26,7 @@ curl -o %{_lein_jar} \
 
 curl https://raw.github.com/technomancy/leiningen/master/bin/lein \
      | sed s/^LEIN_JAR/#LEIN_JAR/ \
+     | sed s/LEIN_VERSION=/LEIN_VERSION=\"%{_lein_version}\"\#/ \
      > lein
 
 chmod 755 lein
