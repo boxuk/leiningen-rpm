@@ -28,8 +28,6 @@ curl https://raw.github.com/technomancy/leiningen/%{_lein_version}/bin/lein \
      | sed /^LEIN_JAR/d \
      > lein
 
-chmod 755 lein
-
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/%{name}/bin
