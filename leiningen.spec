@@ -24,9 +24,8 @@ Leiningen Build Tool (Box UK)
 curl -o %{_lein_jar} \
         https://leiningen.s3.amazonaws.com/downloads/%{_lein_jar}
 
-curl https://raw.github.com/technomancy/leiningen/master/bin/lein \
-     | sed s/^LEIN_JAR/#LEIN_JAR/ \
-     | sed s/LEIN_VERSION=/LEIN_VERSION=\"%{_lein_version}\"\#/ \
+curl https://raw.github.com/technomancy/leiningen/%{_lein_version}/bin/lein \
+     | sed /^LEIN_JAR/d \
      > lein
 
 chmod 755 lein
