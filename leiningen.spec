@@ -13,19 +13,21 @@ AutoReqProv: no
 %define _prefix /usr/share
 %define _lein_version 2.1.3
 %define _lein_jar leiningen-%{_lein_version}-standalone.jar
+%define _lein_downloads https://leiningen.s3.amazonaws.com/downloads
+%define _lein_repo https://raw.github.com/technomancy/leiningen
 
 %description
-Leiningen Build Tool (Box UK)
+Leiningen Build Tool (Box UK Package)
 
 %prep
 %setup 
 
 %build
 curl -o %{_lein_jar} \
-        https://leiningen.s3.amazonaws.com/downloads/%{_lein_jar}
+        %{_lein_downloads}/%{_lein_jar}
 
-curl https://raw.github.com/technomancy/leiningen/%{_lein_version}/bin/lein \
-     | sed /^LEIN_JAR/d \
+curl %{_lein_repo}/%{_lein_version}/bin/lein \
+     | sed 's#LEIN_JAR=".*"#LEIN_JAR="%{_prefix}/%{name}/lib/%{_lein_jar}"#' \
      > lein
 
 %install
@@ -38,10 +40,8 @@ cp %{_lein_jar} $RPM_BUILD_ROOT%{_prefix}/%{name}/lib
 
 mkdir -p $RPM_BUILD_ROOT/etc/profile.d
 cat <<EOF >$RPM_BUILD_ROOT/etc/profile.d/%{name}.sh
-PATH=%{_prefix}/%{name}/bin:$PATH
+PATH=%{_prefix}/%{name}/bin:\$PATH
 export PATH
-LEIN_JAR=%{_prefix}/%{name}/lib/%{_lein_jar}
-export LEIN_JAR
 EOF
 
 %clean
