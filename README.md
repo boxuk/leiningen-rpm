@@ -18,5 +18,5 @@ git push --tags
 ```
 
 Then after running the build on Jenkins the package will be available in
-the unstable repo.
+the unstable Box UK repo.
 
