@@ -1,6 +1,6 @@
 Name: boxuk-leiningen
 Version: %{_ver}
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Leiningen Build Tool
 Group: Development/Tools
 License: Propriatory
@@ -31,7 +31,7 @@ curl %{_lein_repo}/%{_lein_version}/bin/lein \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT%{_usr}/{bin,share}
+mkdir -p $RPM_BUILD_ROOT%{_usr}/{bin,share/java}
 
 cp lein $RPM_BUILD_ROOT%{_usr}/bin
 cp %{_lein_jar} $RPM_BUILD_ROOT%{_usr}/share/java
@@ -42,5 +42,5 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %attr(755, root, root) %{_usr}/bin/lein
-%attr(644, root, root) %{_usr}/share/%{_lein_jar}
+%attr(644, root, root) %{_usr}/share/java/%{_lein_jar}
 
